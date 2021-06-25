@@ -1,0 +1,27 @@
+{% extends 'base.html.twig' %}
+{% block body %}
+    My index {{page}}
+<table>
+<thead>
+    <th>Produit</th>
+    <th> Prix</th>
+</thead>
+<tbody>
+        {% for product in products %}
+        <tr>
+            <td><a href=" {{ path('product_show', {slug: product.slug,prix: product.price}) }}">{{ product.name }}</a></td>
+            <td> {{product.price}}</td>
+            <td> <a class="btnAddProductEdit" href="{{ path('edit_category',{slug: product.category.slug}) }}" >{{product.category.name}}</a></td>
+            <td><button class="btnAddProduct" url="{{ path('add_product',{slug: product.slug}) }}" >Ajouter au Panier</button></td>
+            <td><a class="btnAddProductEdit" href="{{ path('edit_product',{id: product.id}) }}" >Editer</a></td>
+            </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+
+{% endblock %}
+
+{% block javascripts %}
+            {{ encore_entry_script_tags('cart') }}
+{% endblock %}
