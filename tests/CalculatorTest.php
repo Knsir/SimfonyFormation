@@ -13,12 +13,13 @@ class CalculatorTest extends WebTestCase
     /** @var Slugify */
     private $slugify;
    
-    protected function setUp()
+    protected function setUp():void
     {
         self::bootKernel();
         $container= self::$container;
         $this->slugify= $container->get('App\Service\Slugify');
     }
+    
     public function testSomething(): void
     {
         $testvalue = 'trilou se';
