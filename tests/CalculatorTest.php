@@ -2,12 +2,28 @@
 
 namespace App\Tests;
 
+use App\Entity\Product;
+use App\Service\Slugify;
 use PHPUnit\Framework\TestCase;
+use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 
-class CalculatorTest extends TestCase
+
+class CalculatorTest extends WebTestCase
 {
+    /** @var Slugify */
+    private $slugify;
+   
+    protected function setUp()
+    {
+        self::bootKernel();
+        $container= self::$container;
+        $this->slugify= $container->get('App\Service\Slugify');
+    }
     public function testSomething(): void
     {
-        $this->assertTrue(true);
+        $testvalue = 'trilou se';
+
+        $this->assertTrue($this->slugify->slugify($testvalue)==='trilou-se');
+
     }
 }
